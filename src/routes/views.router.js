@@ -11,7 +11,6 @@ const router = Router();
 //TODO proteger estas vistas
 router.get('/', passport.authenticate('jwt',{session: false}), async(req,res)=>{
     let students = await studentService.getAll();
-    console.log(req.cookies);
     res.render('students',{students: students})
 })
 

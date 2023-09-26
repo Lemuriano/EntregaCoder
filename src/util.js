@@ -25,7 +25,7 @@ export const PRIVATE_KEY = "CoderhouseBackendCourseSecretKeyJWT";
  * Tercer argumento: Tiempo de expiración del token.
  */
 export const generateJWToken = (user) => {
-    return jwt.sign({user}, PRIVATE_KEY, {expiresIn: '120s'}); //-->Token generado con duracion en segundos.
+    return jwt.sign({user}, PRIVATE_KEY, {expiresIn: '360s'}); //-->Token generado con duracion en segundos.
 };
 
 //Util para llamados más controlados de los strategy de Passport.

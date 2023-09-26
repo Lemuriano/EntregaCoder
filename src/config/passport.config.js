@@ -9,7 +9,7 @@ const initializePassport = () => {
     //TODO generar las reglas para extraer el token y las autorizaciones necesarias.
     passport.use('jwt', new JWTStrategy({
         jwtFromRequest: ExtractJWT.fromExtractors([cookieExtractor]),
-        secretOrKey: 'chiche',
+        secretOrKey: 'CoderhouseBackendCourseSecretKeyJWT',
     }, async (jwt_payload, done) =>{
         try {
             return done(null, jwt_payload)

@@ -11,7 +11,6 @@ router.post("/login", async (req, res)=>{
     try {
         const user = await studentService.findByUsername(email);
         console.log("Usuario encontrado para login:");
-        console.log(user);
         if (!user) {
             console.warn("User doesn't exists with username: " + email);
             return res.status(400).send({error: "Not found", message: "Usuario no encontrado con username: " + email});
@@ -20,19 +19,22 @@ router.post("/login", async (req, res)=>{
             console.warn("Invalid credentials for user: " + email);
             return res.status(401).send({status:"error",error:"El usuario y la contraseña no coinciden!"});
         }
+        
         const tokenUser= {
             name : `${user.name} ${user.lastName}`,
             email: user.email,
             age: user.age,
             role: user.role
-        };
+        }
+
         const access_token = generateJWToken(tokenUser);
         console.log(access_token);
         res.cookie('jwtCookieToken', access_token, {
-            maxAge: 900000,
+            maxAge: 90000,
             httpOnly: true
-        });
-        res.send({message: "Login successful!"});
+        })
+
+        return res.send({message: "Login successful!"})
     } catch (error) {
         console.error(error);
         return res.status(500).send({status:"error",error:"Error interno de la applicacion."});
